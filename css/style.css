@@ -3,27 +3,58 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .search-field {
-  border: none;
+  /* border: none;
   border-radius: 50px;
   padding: 5px;
-  outline: none;
+  outline: none; */
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0;
+}
+.search-box {
+  display: flex;
+  flex-direction: row;
 }
 .search-field:hover {
   outline: none;
   border: none;
 }
-.search-box {
+/* .search-box {
   border: 1px solid rgb(3, 118, 211);
   width: 281px;
   border-radius: 5px;
   margin: auto;
   margin-top: 50px;
   border-right: none;
-}
-.search-button {
+} */
+/* .search-button {
   padding: 10px 50px;
   border-radius: 25px;
-  margin-left: 20px;
+  margin-left: 0px;
+} */
+.search-inpt {
+  padding: 0.8rem 1rem;
+  width: 30rem;
+  font-size: 1.7rem;
+  border: none;
+  outline: none;
+  border-radius: 1rem 0 0 1rem;
+  box-shadow: 0 0 1rem gray;
+}
+/* .search-inpt:focus + .search-btn {
+  border: 1px solid rgb(56, 170, 241);
+} */
+.search-btn {
+  outline: none;
+  border: none;
+  border-radius: 0 0 0 0;
+  padding: 0.8rem 1rem;
+  font-size: 1.7rem;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: 0 0 1rem gray;
+}
+.search-btn:hover {
+  background-color: rgb(190, 216, 231);
 }
 #all-products {
   display: grid;
@@ -36,8 +67,9 @@ body {
   justify-content: center;
 }
 .single-product {
-  padding: 10px;
+  padding: 3rem;
   transition: 0.6s;
+  min-height: 42rem;
 }
 .single-product:hover {
   box-shadow: 4px 4px 7px gray;
@@ -47,6 +79,9 @@ body {
 .product-image {
   width: 150px;
   height: 150px;
+}
+.product-title {
+  font-size: 3rem;
 }
 .cart {
   width: 350px;
