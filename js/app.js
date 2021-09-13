@@ -60,12 +60,15 @@ const showProducts = (products) => {
       <p class="product-category text-2xl font-bold">Category:<hr/> ${product.category}</p>
       </div>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now w-full bg-red-100 rounded-lg py-3 mt-4 hover:bg-red-200 font-bold">Add to Cart</button>
-      <button id="details-btn" class="w-full bg-red-400 hover:bg-red-500 rounded-lg py-3 mt-2 font-bold">Details</button>
+
+      <button id="details-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="getModal(${product.id})" class="w-full bg-red-400 hover:bg-red-500 rounded-lg py-3 mt-2 font-bold">Details</button>
       </div>
+
+
       <div class="bg-green-100 px-6 py-4 rounded-lg flex flex-col align-center justify-center shadow-sm">
       <p class="product-price p-3 shadow-lg text-2xl font-bold">Price: $${product.price}</p>
       <p class="p-3 shadow-lg text-2xl font-bold">Rating: ${product.rating.rate}<br>
-      ${star}
+      <span id="star-field">${star}</span>
       </p>
       <p class="p-3 shadow-lg text-2xl font-bold">Tot. Rating: ${product.rating.count}</p>
       </div>
@@ -75,6 +78,22 @@ const showProducts = (products) => {
     document.getElementById("all-products").appendChild(div);
   }
 };
+
+const getModal= (id) =>{
+  const url = `https://fakestoreapi.com/products/${id}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => handleModal(data));
+}
+
+const handleModal = (data) =>{
+  console.log("data", data)
+  document.getElementById("modal-img").setAttribute("src", `${data.image}`);
+  document.getElementById("modal-title").innerText = data.title;
+  document.getElementById("modal-des").innerText = data.description;
+  document.getElementById("modal-price").innerText = data.price;
+  document.getElementById("modal-rate").innerHTML = `${data.rating.rate} <i class="fas fa-star"></i>`;
+}
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
