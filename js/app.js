@@ -49,7 +49,7 @@ const showProducts = (products) => {
       }
     }
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product rounded-md bg-white">
+    div.innerHTML = `<div class="single-product rounded-md bg-white shadow">
       <div class="flex justify-center">
       <img class="product-image" src=${image}></img>
       </div>
@@ -63,7 +63,6 @@ const showProducts = (products) => {
 
       <button id="details-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="getModal(${product.id})" class="w-full bg-red-400 hover:bg-red-500 rounded-lg py-3 mt-2 font-bold">Details</button>
       </div>
-
 
       <div class="bg-green-100 px-6 py-4 rounded-lg flex flex-col align-center justify-center shadow-sm">
       <p class="product-price p-3 shadow-lg text-2xl font-bold">Price: $${product.price}</p>
@@ -79,6 +78,7 @@ const showProducts = (products) => {
   }
 };
 
+// get single product 
 const getModal= (id) =>{
   const url = `https://fakestoreapi.com/products/${id}`;
   fetch(url)
@@ -86,8 +86,8 @@ const getModal= (id) =>{
     .then((data) => handleModal(data));
 }
 
+// set data in modal 
 const handleModal = (data) =>{
-  console.log("data", data)
   document.getElementById("modal-img").setAttribute("src", `${data.image}`);
   document.getElementById("modal-title").innerText = data.title;
   document.getElementById("modal-des").innerText = data.description;
