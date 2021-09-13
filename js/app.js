@@ -12,18 +12,65 @@ const showProducts = (products) => {
   for (const product of allProducts) {
     const image = product.image;
     const div = document.createElement("div");
+
+    // for making rating star 
+    let floor_rate;
+    let isInt;
+    if(product.rating.rate % 1 === 0){
+      floor_rate = product.rating.rate;
+      isInt = true;
+    }
+    else{
+      floor_rate = Math.floor(product.rating.rate);
+      isInt = false;
+    }
+    let star = "";
+    if (isInt){
+      for(var i=1; i<=5; i++){
+        if(i >floor_rate){
+          star +=`<i class="far fa-star"></i>`
+        }
+        else{
+          star +=`<i class="fas fa-star"></i>`
+        }
+      }
+    }
+    else{
+      for(var i=1; i<=5; i++){
+        if(i >floor_rate+1){
+          star +=`<i class="far fa-star"></i>`
+        }
+        else if(i==floor_rate+1){
+          star +=`<i class="fas fa-star-half-alt"></i>`
+        }
+        else{
+          star +=`<i class="fas fa-star"></i>`
+        }
+      }
+    }
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
+    div.innerHTML = `<div class="single-product rounded-md bg-white">
+      <div class="flex justify-center">
+      <img class="product-image" src=${image}></img>
       </div>
-      <h3 class="product-title">${product.title}</h3>
-      <p class="product-category">Category: ${product.category}</p>
-      <h2 class="product-price">Price: $ ${product.price}</h2>
-      <h3>Rate: ${product.rating.rate}</h3>
-      <h3>Rateing: ${product.rating.count}</h3>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <h3 class="product-title text-5xl font-bold mb-4">${product.title}</h3>
+      <div class="flex justify-around">
+      <div class="mr-1">
+      <div class="bg-green-100 px-6 py-4 rounded-lg shadow-sm">
+      <p class="product-category text-2xl font-bold">Category:<hr/> ${product.category}</p>
+      </div>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now w-full bg-red-100 rounded-lg py-3 mt-4 hover:bg-red-200 font-bold">Add to Cart</button>
+      <button id="details-btn" class="w-full bg-red-400 hover:bg-red-500 rounded-lg py-3 mt-2 font-bold">Details</button>
+      </div>
+      <div class="bg-green-100 px-6 py-4 rounded-lg flex flex-col align-center justify-center shadow-sm">
+      <p class="product-price p-3 shadow-lg text-2xl font-bold">Price: $${product.price}</p>
+      <p class="p-3 shadow-lg text-2xl font-bold">Rating: ${product.rating.rate}<br>
+      ${star}
+      </p>
+      <p class="p-3 shadow-lg text-2xl font-bold">Tot. Rating: ${product.rating.count}</p>
+      </div>
+      </div>
+      </div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
